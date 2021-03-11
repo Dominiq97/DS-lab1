@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'calculator';
+
+  ngOnInit() {
+    $('button').click(function() {alert('Alert!');});
+  }
+
 }
+declare var $:any;
