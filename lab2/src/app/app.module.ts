@@ -13,12 +13,16 @@ import{ MatDatepickerModule } from '@angular/material/datepicker';
 import{ MatRadioModule } from '@angular/material/radio';
 import{ MatSelectModule} from '@angular/material/select';
 import{ BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms'
+import {ReactiveFormsModule} from '@angular/forms';
+import { ContactComponent } from './contact/contact.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,8 @@ import{ BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

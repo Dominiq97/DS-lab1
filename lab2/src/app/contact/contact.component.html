@@ -1,0 +1,90 @@
+<div class="contact">
+  <mat-form-field appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="option"></mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Employee contact form</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Employee name" [(ngModel)]="contactName" name="contactName" required>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Contact Address</mat-label>
+        <textarea [(ngModel)]="contactAddress" matInput></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <mat-checkbox [checked]='isDeleted'>Is Deleted?</mat-checkbox>
+  <br />
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input [value]="date" matInput [matDatepicker]="myPicker" placeholder="date">
+    <mat-datepicker-toggle matSuffix [for]="myPicker"></mat-datepicker-toggle>
+    <mat-datepicker #myPicker></mat-datepicker>
+  </mat-form-field>
+  <br />
+
+  <mat-form-field>
+    <input [value]="date" matInput [matDatepicker]="myPicker" placeholder="date">
+    <mat-datepicker-toggle matSuffix [for]="myPicker1"></mat-datepicker-toggle>
+    <mat-datepicker #myPicker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="myPicker2" placeholder="date">
+    <mat-datepicker-toggle matSuffix [for]="myPicker2"></mat-datepicker-toggle>
+    <mat-datepicker #myPicker2></mat-datepicker>
+  </mat-form-field>
+
+  <mat-label>Gender</mat-label>
+  <mat-radio-group [(value)]="contactGender">
+    <mat-radio-button value="true">Male</mat-radio-button>
+    <mat-radio-button value="false">Female</mat-radio-button>
+  </mat-radio-group>
+  <br />
+  <br />
+  <mat-form-field>
+    <mat-label>Source of Contact</mat-label>
+    <mat-select [(value)]="contactSource" placeholder="Source of contact">
+      <mat-option value="email">Email</mat-option>
+      <mat-option value="website">Website</mat-option>
+      <mat-option value="direct">Direct</mat-option>
+    </mat-select>
+  </mat-form-field>
+<mat-card>
+  <mat-card-actions>
+    <mat-card-actions>
+      <button mat-raised-button (click)="saveContact()" color="primary">Save contact</button>
+    </mat-card-actions>
+  </mat-card-actions>
+
+</mat-card>
+
+
+
+
+
+
+
+
+
+</div>
+
+
