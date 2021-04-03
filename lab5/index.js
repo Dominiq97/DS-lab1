@@ -1,25 +1,25 @@
 "usestrict";
-constexpress=require('express');
-constbodyParser=require('body-parser');
-constcors=require('cors');
-constsqlite3=require('sqlite3').verbose(); 
-constjwt=require('jsonwebtoken');
-constbcrypt=require('bcryptjs'); 
+const express=require('express');
+const bodyParser=require('body-parser');
+const cors=require('cors');
+const sqlite3=require('sqlite3').verbose(); 
+const jwt=require('jsonwebtoken');
+const bcrypt=require('bcryptjs'); 
 const SECRET_KEY = "secretkey23456"; 
-constapp=express();
-constrouter=express.Router(); 
+const app=express();
+const router=express.Router(); 
 app.use(cors());
 router.use(bodyParser.urlencoded({ extended:false})); 
 router.use(bodyParser.json());
-constdatabase= newsqlite3.Database("./my.db");
-constcreateUsersTable= () => { 
+const database= new sqlite3.Database("./my.db");
+const createUsersTable= () => { 
     const sqlQuery=`
     CREATE TABLE IF NOT EXISTS users(
     id integer PRIMARY KEY, 
     name text,
     email text UNIQUE,
     password text)`;
-    returndatabase.run(sqlQuery);
+    return database.run(sqlQuery);
 }
 const findUserByEmail=(email,cb)=>
 {
@@ -29,35 +29,35 @@ const findUserByEmail=(email,cb)=>
     
 const createUser=(user,cb)=>
 {
-    returndatabase.run('INSERT INTO users(name, email,password) VALUES (?,?,?)',user,(err)=>{cb(err)});
+    return database.run('INSERT INTO users(name, email,password) VALUES (?,?,?)',user,(err)=>{cb(err)});
 }
     
 createUsersTable(); 
 router.get('/',(req,res)=>
 {
-    res.status(200).send('Thisisanauthenticationserver');
+    res.status(200).send('This is an authentication server');
 });
 
 router.post('/register',(req,res) =>
 { 
-    constname=req.body.name; 
-    constemail=req.body.email; 
+    const name=req.body.name; 
+    const email=req.body.email; 
     console.log(req.body);
-    constpassword=bcrypt.hashSync(req.body.password); 
+    const password=req.body.password; 
     createUser([name,email,password],(err)=>
     {
-        if(err)returnres.status(500).send("Server error!");
+        if(err) return res.status(500).send("Server error!");
         findUserByEmail(email,(err,user)=>
         {
-            if(err)returnres.status(500).send('Servererror!'); 
-            constexpiresIn=24*60*60;
-            constaccessToken=jwt.sign({
+            if(err) return res.status(500).send('Servererror!'); 
+            const expiresIn=24*60*60;
+            const accessToken=jwt.sign({
                 id:user.id
-            }, 
+            },
             SECRET_KEY,{expiresIn:expiresIn});
             res.status(200).send(
                 {
-                    "user":  user,"access_token":accessToken,"expires_in":expiresIn
+                    "user":user,"access_token":accessToken,"expires_in":expiresIn
                 });
             });
         });
@@ -65,15 +65,16 @@ router.post('/register',(req,res) =>
 
 router.post('/login', (req,res)=>
 { 
-    constemail  =req.body.email;
-    constpassword=req.body.password; 
+    const email  =req.body.email;
+    const password=req.body.password; 
     findUserByEmail(email,(err,user)=>
     {
-        if(err)returnres.status(500).send('Servererror!');
-        if(!user)returnres.status(404).send('Usernotfound!');
+        if(err) return res.status(500).send('Servererror!');
+        if(!user) return res.status(404).send('Usernotfound!');
         constresult=bcrypt.compareSync(password,user.password);
-        if(!result)returnres.status(401).send('Passwordnot valid!');
-        constexpiresIn=24*60*60;constaccessToken=jwt.sign(
+        if(!result) return res.status(401).send('Passwordnot valid!');
+        const expiresIn=24*60*60;
+        const accessToken=jwt.sign(
         {
             id:user.id
         }, 
@@ -88,8 +89,8 @@ router.post('/login', (req,res)=>
 });
 
 app.use(router);
-constport=process.env.PORT||3000; 
-constserver=app.listen(port,()=>
+const port=process.env.PORT||3000; 
+const server=app.listen(port,()=>
 {
-    console.log('Serverlisteningathttp://localhost:'+port);
+    console.log('Server listening at http://localhost:'+port);
 });
