@@ -7,11 +7,8 @@ import {UpdateComponent} from './crud/update/update.component'
 
 
 
-const routes: Routes = [{path:'crud', redirectTo:'crud/home',pathMatch:'full'},
-{path: 'crud/home', component: HomeComponent},
-{path: 'crud/details/:productId', component: DetailsComponent},
-{path: 'crud/create', component: CreateComponent},
-{path: 'crud/update/:productId',component:UpdateComponent}];
+const routes: Routes = []
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

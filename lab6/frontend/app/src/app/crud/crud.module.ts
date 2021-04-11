@@ -5,9 +5,11 @@ import { CrudRoutingModule } from './crud-routing.module';
 import {HttpClientModule} from '@angular/common/http'
 import {FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-import { DetailsComponent } from './details/details.component';
-import { CreateComponent } from './create/create.component';
-import { UpdateComponent } from './update/update.component'
+import { DetailsComponent } from './crud/details/details.component';
+import { CreateComponent } from './crud/create/create.component';
+import { UpdateComponent } from './crud/update/update.component';
+import { Routes, RouterModule } from '@angular/router';
+
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import { UpdateComponent } from './update/update.component'
     CrudRoutingModule,
     HttpClientModule,
     FormsModule,
+    RouterModule,
   ]
 })
 export class CrudModule { }

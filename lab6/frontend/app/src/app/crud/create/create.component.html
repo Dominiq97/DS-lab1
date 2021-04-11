@@ -1,1 +1,57 @@
-<p>create works!</p>
+<!-- member-add.component.html -->
+
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Name</label>
+        <input type="text" class="form-control"
+        formControlName="Name"
+          #Name/>
+      </div>
+      <div *ngIf="angForm.controls['Name'].invalid && (angForm.controls['Name'].dirty || angForm.controls['Name'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['Name'].errors.required">
+          Product Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Product Description </label>
+        <textarea class="form-control" rows = 7 cols = "5"
+        formControlName="Description"
+        #Description></textarea>
+      </div>
+      <div *ngIf="angForm.controls['Description'].invalid && (angForm.controls['Description'].dirty || angForm.controls['Description'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['Description'].errors.required">
+          Product Description is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Member Age</label>
+        <input type="text" class="form-control"
+        formControlName="Quantity"
+        #Quantity/>
+      </div>
+      <div *ngIf="angForm.controls['Quantity'].invalid && (angForm.controls['Quantity'].dirty || angForm.controls['Quantity'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['Quantity'].errors.required">
+          Product Quantity is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Price</label>
+        <input type="text" class="form-control"
+        formControlName="Price"
+        #Price/>
+      </div>
+      <div *ngIf="angForm.controls['Price'].invalid && (angForm.controls['Price'].dirty || angForm.controls['Price'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['Price'].errors.required">
+          Product Price is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary"
+        [disabled]="angForm.pristine || angForm.invalid"
+        (click) = "addProduct(Name.value, Description.value, Quantity.value, Price.value)">Create Member</button>
+      </div>
+    </form>
+  </div>
+</div>
